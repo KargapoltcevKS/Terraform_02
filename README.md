@@ -46,7 +46,7 @@ curl -sSL https://storage.yandexcloud.net/yandexcloud-yc/install.sh | bash
 
 1. Изучил проект и файл variables.tf
 2. Создал сервисный аккаунт и ключ:
-![1](https://github.com/KargapoltcevKS/Terraform_02/img/blob/main/img/1.png)
+![1](https://github.com/KargapoltcevKS/Terraform_02/blob/main/img/1.png)
 3. Сгенерировал новый ssh-ключ
 ```
 ssh-keygen -t ed25519
