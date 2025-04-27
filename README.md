@@ -10,6 +10,9 @@
 
 1. Зарегистрирован аккаунт в Yandex Cloud. Использован промокод на грант.
 2. Установлен инструмент Yandex CLI.
+```
+curl -sSL https://storage.yandexcloud.net/yandexcloud-yc/install.sh | bash
+```
 3. Исходный код для выполнения задания расположен в директории [**02/src**](https://github.com/netology-code/ter-homeworks/tree/main/02/src).
 
 
@@ -38,6 +41,39 @@
 
 - скриншот ЛК Yandex Cloud с созданной ВМ, где видно внешний ip-адрес;
 - скриншот консоли, curl должен отобразить тот же внешний ip-адрес;
+
+### РЕШЕНИЕ 1
+
+1. Изучил проект и файл variables.tf
+2. Создал сервисный аккаунт и ключ:
+![1](https://github.com/KargapoltcevKS/Terraform_02/img/blob/main/img/1.png)
+3. Сгенерировал новый ssh-ключ
+```
+ssh-keygen -t ed25519
+```
+Записал его открытую(public) часть в переменную **vms_ssh_public_root_key**
+```
+###ssh vars
+
+variable "vms_ssh_root_key" {
+  type        = string
+  default     = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAMhX97XTMEk0+fKEjegV71O18DUyTbQoiPIudez/Tj9 kos@kos-VirtualBox"
+  description = "ssh-keygen -t ed25519"
+}
+```
+4. Инициализировал проект 
+```
+terraform init
+```
+Выполнил команду
+```
+terraform plan
+```
+Ошибки:
+В строке platform_id = "standart-v4" должно быть слово standard
+Версия v4 неправильная. Согласно документации Yandex.Cloud (https://cloud.yandex.ru/docs/compute/concepts/vm-platforms) платформы могут быть только v1, v2 и v3.
+В строке cores = 1 указано неправильное количество ядер процессора. Согласно документации Yandex.Cloud (https://cloud.yandex.ru/docs/compute/concepts/performance-levels) минимальное количество виртуальных ядер процессора для всех платформ равно двум.
+
 - ответы на вопросы.
 
 
